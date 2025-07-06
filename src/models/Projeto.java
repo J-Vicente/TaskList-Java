@@ -1,18 +1,27 @@
+package models;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Projeto{
+public class Projeto{
     private String nome;
     private String descricao;
-    private String criador;
+    private Usuario criador;
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    public void Usuario(String nome, String descricao, String criador){
+    public Projeto(String nome, String descricao, Usuario criador){
         this.nome = nome;
         this.descricao = descricao;
         this.criador = criador;
     }
 
+    public String getNome(){
+        return this.nome;
+    }
+
+    public String getDesc(){
+        return this.descricao;
+    }
 
     public void adicionarTarefa(Tarefa tarefa){
 
