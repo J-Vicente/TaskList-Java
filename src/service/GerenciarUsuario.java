@@ -23,9 +23,6 @@ public class GerenciarUsuario{
             usuariosSistema.put(nome, new Usuario(nome, email, senha));
             System.out.println("Usuário cadastrado com sucesso.");
         }
-
-        
-
     }
 
     public static void fazerLogin() {

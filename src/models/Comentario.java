@@ -6,9 +6,13 @@ public class Comentario{
     private String mensagem;
     private LocalDate data;
 
-    public void Comentario(Usuario autor, String mensagem, LocalDate data){
+    public Comentario(Usuario autor, String mensagem, LocalDate data){
         this.autor = autor;
         this.mensagem = mensagem;
         this.data = data;
+    }
+
+    public String getMensagem(){
+        return this.mensagem;
     }
 }

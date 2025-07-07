@@ -19,4 +19,12 @@ public class Tarefa{
     public String getTitulo(){
         return this.titulo;
     }
+    
+    public String getDesc(){
+        return this.descricao;
+    }
+
+    public void setStatus(Status status){
+        this.status = status;
+    }
 }
