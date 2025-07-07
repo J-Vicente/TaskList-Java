@@ -10,41 +10,41 @@ public class GerenciarUsuario{
     static Scanner scanner = new Scanner(System.in);
 
     public static void cadastrarUsuario() {
-        System.out.print("Informe o nome do novo usuário: ");
+        System.out.print("Informe o nome do novo usuario: ");
         String nome = scanner.nextLine();
-        System.out.print("Informe o email do novo usuário: ");
+        System.out.print("Informe o email do novo usuario: ");
         String email = scanner.nextLine();
-        System.out.print("Informe a senha do novo usuário: ");
+        System.out.print("Informe a senha do novo usuario: ");
         String senha = scanner.nextLine();
 
         if (usuariosSistema.containsKey(nome)) {
-            System.out.println("Usuário já existe.");
+            System.out.println("Usuario ja existe.");
         } else {
             usuariosSistema.put(nome, new Usuario(nome, email, senha));
-            System.out.println("Usuário cadastrado com sucesso.");
+            System.out.println("Usuario cadastrado com sucesso.");
         }
     }
 
     public static void fazerLogin() {
-        System.out.print("Informe o nome do usuário: ");
+        System.out.print("Informe o nome do usuario: ");
         String nome = scanner.nextLine();
-
+    
         if (usuariosSistema.containsKey(nome)) {
             usuarioLogado = usuariosSistema.get(nome);
             System.out.println("Login efetuado com sucesso.");
             menuUsuario();
         } else {
-            System.out.println("Usuário não encontrado.");
+            System.out.println("Usuario nao encontrado.");
         }
     }
 
     public static void menuUsuario() {
         while (true) {
-            System.out.println("\n=== Menu do Usuário: " + usuarioLogado + " ===");
+            System.out.println("\n=== Menu do Usuario: " + usuarioLogado + " ===");
             System.out.println("1. Cadastrar novo Projeto");
             System.out.println("2. Navegar para um Projeto");
             System.out.println("0. Logout");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             String opcao = scanner.nextLine();
 
             switch (opcao) {
@@ -58,7 +58,7 @@ public class GerenciarUsuario{
                     usuarioLogado = null;
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida!");
             }
         }
     }

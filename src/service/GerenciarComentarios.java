@@ -17,9 +17,8 @@ public class GerenciarComentarios{
         
         if(comentariosTarefa.isEmpty()){
             comentariosTarefa.put(tarefa, new ArrayList<>());
-        }else{
-            comentariosTarefa.get(tarefa).add(new Comentario(GerenciarUsuario.usuarioLogado, mensagem, data));
         }
+        comentariosTarefa.get(tarefa).add(new Comentario(GerenciarUsuario.usuarioLogado, mensagem, data));
 
         System.out.println("Comentario adicionado.");
     }
@@ -35,7 +34,8 @@ public class GerenciarComentarios{
         System.out.println("- "+tarefa.getDesc());
 
         for (int i = 0; i < comentarios.size(); i++) {
-            System.out.println((i + 1) + ". " + comentarios.get(i).getMensagem());
+            System.out.println((i + 1) + ". " + comentarios.get(i).getMensagem()+
+            " - data: "+comentarios.get(i).getData());
         }
     }
 }

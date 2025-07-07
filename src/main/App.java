@@ -11,10 +11,10 @@ public class App{
         
          while (true) {
             System.out.println("=== Tela de Boas-Vindas ===");
-            System.out.println("1. Cadastrar novo Usuário");
+            System.out.println("1. Cadastrar novo Usuario");
             System.out.println("2. Fazer Login");
             System.out.println("0. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             String opcao = scanner.nextLine();
 
             switch (opcao) {
@@ -28,7 +28,7 @@ public class App{
                     System.out.println("Encerrando...");
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida!");
             }
         }
     }

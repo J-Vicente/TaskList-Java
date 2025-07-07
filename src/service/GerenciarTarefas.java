@@ -11,14 +11,13 @@ public class GerenciarTarefas{
     public static void cadastrarTarefa(Projeto projeto, Usuario usuarioLogado) {
         System.out.print("Informe o nome da nova tarefa: ");
         String nomeTarefa = scanner.nextLine();
-        System.out.print("Informe uma descircao para a nova tarefa: ");
+        System.out.print("Informe uma descricao para a nova tarefa: ");
         String descTarefa = scanner.nextLine();
 
         if(tarefasProjeto.isEmpty()){
             tarefasProjeto.put(projeto, new ArrayList<>());
-        }else{
-            tarefasProjeto.get(projeto).add(new Tarefa(nomeTarefa, descTarefa, Status.TO_DO, usuarioLogado));
         }
+        tarefasProjeto.get(projeto).add(new Tarefa(nomeTarefa, descTarefa, Status.TO_DO, usuarioLogado));
 
         System.out.println("Tarefa cadastrada com sucesso.");
     }
@@ -34,18 +33,19 @@ public class GerenciarTarefas{
         System.out.println("- "+projeto.getDesc());
 
         for (int i = 0; i < tarefas.size(); i++) {
-            System.out.println((i + 1) + ". " + tarefas.get(i).getTitulo());
+            System.out.println((i + 1) + ". " + tarefas.get(i).getTitulo()+
+            " - status: "+tarefas.get(i).getStatus());
         }
 
-        System.out.print("Escolha uma tarefa pelo número: ");
+        System.out.print("Escolha uma tarefa pelo numero: ");
         int escolha = Integer.parseInt(scanner.nextLine());
 
         if (escolha >= 1 && escolha <= tarefas.size()) {
             Tarefa tarefaSelecionada = tarefas.get(escolha - 1);
-            System.out.println("Você navegou para a tarefa: " + tarefaSelecionada.getTitulo());
+            System.out.println("Voce navegou para a tarefa: " + tarefaSelecionada.getTitulo());
             menuTarefa(tarefaSelecionada);
         } else {
-            System.out.println("Opção inválida.");
+            System.out.println("Opcao invalida.");
         }
     }
 
@@ -53,11 +53,12 @@ public class GerenciarTarefas{
         while (true) {
             System.out.println("\n=== Tarefa: " + tarefa.getTitulo() + " ===");
             System.out.println("- "+tarefa.getDesc());
+            System.out.println("- Status: "+tarefa.getStatus());
             System.out.println("1. Adiconar comentario");
             System.out.println("2. Ler comentarios");
             System.out.println("3. Mudar status");
             System.out.println("0. Voltar");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             String opcao = scanner.nextLine();
 
             switch (opcao) {
@@ -73,7 +74,7 @@ public class GerenciarTarefas{
                 case "0":
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida!");
             }
         }
     }
@@ -85,7 +86,7 @@ public class GerenciarTarefas{
             System.out.println("1. Nao iniciada");
             System.out.println("2. Em progresso");
             System.out.println("3. Concluida");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             String opcao = scanner.nextLine();
 
             switch (opcao) {
@@ -99,8 +100,10 @@ public class GerenciarTarefas{
                     tarefa.setStatus(Status.DONE);
                     break;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida!");
             }
+            
+            return;
         }
         
     }

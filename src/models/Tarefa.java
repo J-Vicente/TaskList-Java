@@ -24,6 +24,10 @@ public class Tarefa{
         return this.descricao;
     }
 
+    public Status getStatus(){
+        return this.status;
+    }
+
     public void setStatus(Status status){
         this.status = status;
     }
