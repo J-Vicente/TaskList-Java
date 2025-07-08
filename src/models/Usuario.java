@@ -11,12 +11,12 @@ public class Usuario{
         this.senha = senha;
     }
 
-    private boolean validarSenha(String senha){
-
-        return true;
+    public boolean validarSenha(String senhaDigitada) {
+        return this.senha.equals(senhaDigitada);
     }
 
-    public String toString(){
-        return "";
+    public String getNome(){
+        return this.nome;
     }
+
 }

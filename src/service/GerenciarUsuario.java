@@ -26,21 +26,31 @@ public class GerenciarUsuario{
     }
 
     public static void fazerLogin() {
-        System.out.print("Informe o nome do usuario: ");
-        String nome = scanner.nextLine();
-    
-        if (usuariosSistema.containsKey(nome)) {
-            usuarioLogado = usuariosSistema.get(nome);
-            System.out.println("Login efetuado com sucesso.");
-            menuUsuario();
-        } else {
-            System.out.println("Usuario nao encontrado.");
+        while (usuarioLogado == null) {            
+            System.out.print("Informe o nome do usuario: ");
+            String nome = scanner.nextLine();
+        
+            if (usuariosSistema.containsKey(nome)) {
+                System.out.print("Informe a senha: ");
+                String senha = scanner.nextLine();
+
+                if(usuariosSistema.get(nome).validarSenha(senha)){
+                    usuarioLogado = usuariosSistema.get(nome);
+                
+                    System.out.println("Login efetuado com sucesso: "+usuarioLogado.getNome());
+                    menuUsuario();
+                } else {
+                    System.out.println("Senha incorreta.");
+                }
+            } else {
+                System.out.println("Usuario nao encontrado.");
+            }
         }
     }
 
     public static void menuUsuario() {
         while (true) {
-            System.out.println("\n=== Menu do Usuario: " + usuarioLogado + " ===");
+            System.out.println("\n=== Menu do Usuario: " + usuarioLogado.getNome() + " ===");
             System.out.println("1. Cadastrar novo Projeto");
             System.out.println("2. Navegar para um Projeto");
             System.out.println("0. Logout");
