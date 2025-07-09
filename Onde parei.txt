@@ -1,7 +1,0 @@
-próximos passos:
-1:
-
-validar senha e salvar os dados de alguma forma, json ou banco local;
-
-2:
-iniciar fase 2 com Spring Boot
