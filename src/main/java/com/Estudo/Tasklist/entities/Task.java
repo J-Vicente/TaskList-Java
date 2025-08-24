@@ -1,9 +1,8 @@
 package com.Estudo.Tasklist.entities;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-
-import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -114,6 +113,14 @@ public class Task {
 
     public void setComent(List<Coment> coments) {
         this.coments = coments;
+    }
+
+    public LocalDate getTerm() {
+        return term;
+    }
+
+    public void setTerm(LocalDate term) {
+        this.term = term;
     }
 
     @Override
