@@ -1,18 +1,18 @@
 package com.Estudo.Tasklist.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.Estudo.Tasklist.repositories.ProjectRepository;
 import com.Estudo.Tasklist.dtos.project.NewProjectDto;
 import com.Estudo.Tasklist.dtos.project.ProjectAllDto;
+import com.Estudo.Tasklist.dtos.project.ProjectDto;
 import com.Estudo.Tasklist.entities.Project;
 import com.Estudo.Tasklist.entities.User;
+import com.Estudo.Tasklist.repositories.ProjectRepository;
 import com.Estudo.Tasklist.repositories.UserRepository;
-import com.Estudo.Tasklist.dtos.project.ProjectDto;
-
-import java.util.List;
 
 
 @Service
@@ -37,7 +37,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public void create(NewProjectDto dto) {
+    public Project create(NewProjectDto dto) {
         User creator = userRepository.findById(dto.getCreatorId())
                 .orElseThrow(() -> new RuntimeException("Usuário criador não encontrado"));
 
@@ -46,7 +46,7 @@ public class ProjectService {
         project.setDescription(dto.getDescription());
         project.setCreator(creator);
 
-        projectRepository.save(project);
+        return projectRepository.save(project);
     }
   
 }
