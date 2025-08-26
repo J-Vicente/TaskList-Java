@@ -18,20 +18,20 @@ public class User {
     @GeneratedValue
     private Long id;
     private String name;    
+
     private String email;
     private String password;
 
     @OneToMany(mappedBy = "creator")
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "responsible")
+    @OneToMany(mappedBy = "responsibles")
     private List<Task> tasks = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String password) {
-        this.id = id;
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

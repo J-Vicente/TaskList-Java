@@ -33,10 +33,11 @@ public class Coment {
     public Coment() {
     }
 
-    public Coment(Long id, String message, LocalDate date) {
-        this.id = id;
+    public Coment(String message, LocalDate date, Task task, User author) {
         this.message = message;
         this.date = date;
+        this.task = task;
+        this.author = author;
     }
 
     public Long getId() {

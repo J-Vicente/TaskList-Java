@@ -36,10 +36,10 @@ public class Project {
     public Project() {
     }
 
-    public Project(Long id, String name, String description) {
-        this.id = id;
+    public Project(String name, String description, User creator) {
         this.name = name;
         this.description = description;
+        this.creator = creator;
     }
 
     public Long getId() {

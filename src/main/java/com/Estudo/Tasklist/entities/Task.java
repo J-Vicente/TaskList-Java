@@ -52,11 +52,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(Long id, String name, String description, Status status) {
-        this.id = id;
+    public Task(String name, LocalDate term, String description, Status status, Project project, List<User> responsibles) {
         this.name = name;
+        this.term = term;
         this.description = description;
         this.status = status;
+        this.project = project;
+        this.responsibles = responsibles;
     }
 
     public Long getId() {
