@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Estudo.Tasklist.dtos.project.NewProjectDto;
 import com.Estudo.Tasklist.dtos.project.ProjectAllDto;
 import com.Estudo.Tasklist.dtos.project.ProjectDto;
-import com.Estudo.Tasklist.entities.Project;
 import com.Estudo.Tasklist.services.ProjectService;
 
 @RestController
@@ -38,8 +37,8 @@ public class ProjectController {
     }
 
     @PostMapping("/newProject")
-    public ResponseEntity<Project> createProject(@RequestBody NewProjectDto dto) {
-        Project newProject = projectService.create(dto);
+    public ResponseEntity<ProjectDto> createProject(@RequestBody NewProjectDto dto) {
+        ProjectDto newProject = projectService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newProject);
     }
 

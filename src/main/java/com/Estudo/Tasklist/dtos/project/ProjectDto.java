@@ -16,7 +16,7 @@ public class ProjectDto {
     private String name;
     private String description;
     private String creator;
-    private List<Task> tasks = new ArrayList<>();
+    private List<String> tasks = new ArrayList<>();
 
     public ProjectDto() {
     }
@@ -24,6 +24,7 @@ public class ProjectDto {
     public ProjectDto(Project entity) {
         BeanUtils.copyProperties(entity, this);
         this.creator = entity.getCreator().getName();
+        this.tasks = entity.getTasks().stream().map(Task::getName).toList();
     }
 
     public Long getId() {
@@ -58,11 +59,11 @@ public class ProjectDto {
         this.creator = creatorId;
     }
 
-    public List<Task> getTasks() {
+    public List<String> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(List<String> tasks) {
         this.tasks = tasks;
     }
 }

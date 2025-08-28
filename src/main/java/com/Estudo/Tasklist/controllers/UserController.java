@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import jakarta.validation.Valid;
 
 import com.Estudo.Tasklist.dtos.auth.LoginDto;
 import com.Estudo.Tasklist.dtos.auth.RegistrationDto;
 import com.Estudo.Tasklist.dtos.auth.UserDto;
 import com.Estudo.Tasklist.services.UserService;
 
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@Valid @RequestBody LoginDto dto) {
-        UserDto response = userService.login(dto);
-        return ResponseEntity.ok(response);
+        UserDto credentials = userService.login(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(credentials);
     }
 }

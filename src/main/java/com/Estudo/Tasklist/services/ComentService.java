@@ -33,15 +33,15 @@ public class ComentService {
 
     @Transactional(readOnly = true)
     public List<ComentAllDto> findAll(Long taskId, long projectId) {
-        List<Coment> coments = taskService.findById(taskId, projectId).getComent();
-        return coments.stream().map(coment -> new ComentAllDto(coment)).toList();
+        List<ComentAllDto> coments = taskService.findById(taskId, projectId).getComent();
+        return coments;
     }
 
 
     @Transactional
-    public Coment create(NewComentDto dto, Long taskId) {
+    public ComentAllDto create(NewComentDto dto, Long taskId) {
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Projeto não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrado"));
 
         User author = userRepository.findById(dto.getAuthorId())
                 .orElseThrow(() -> new RuntimeException("Usuário autor não encontrado"));
@@ -54,8 +54,8 @@ public class ComentService {
 
         Coment newComent = comentRepository.save(coment);
 
-        task.getComent().add(newComent);
+        task.getComent().add(newComent);      
 
-        return newComent;
+        return new ComentAllDto(newComent);
     }
 }

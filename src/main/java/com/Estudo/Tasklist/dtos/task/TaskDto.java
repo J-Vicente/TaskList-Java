@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import com.Estudo.Tasklist.entities.Coment;
-import com.Estudo.Tasklist.entities.Project;
+import com.Estudo.Tasklist.dtos.coment.ComentAllDto;
 import com.Estudo.Tasklist.entities.Status;
 import com.Estudo.Tasklist.entities.Task;
 import com.Estudo.Tasklist.entities.User;
@@ -19,14 +18,16 @@ public class TaskDto {
     private String description;
     private Status status;
     private Long projectId;
-    private List<User> responsibles;
-    private List<Coment> coments;
+    private List<String> responsibles;
+    private List<ComentAllDto> coments;
 
     public TaskDto() {
     }
 
     public TaskDto(Task entity) {
         BeanUtils.copyProperties(entity, this);
+        this.responsibles = entity.getResponsibles().stream().map(User::getName).toList();
+        this.coments = entity.getComent().stream().map(ComentAllDto::new).toList();
     }
 
     public Long getId() {
@@ -69,19 +70,19 @@ public class TaskDto {
         this.projectId = projectId;
     }
 
-    public List<User> getResponsibles() {
+    public List<String> getResponsibles() {
         return responsibles;
     }
 
-    public void setResponsibles(List<User> responsibles) {
+    public void setResponsibles(List<String> responsibles) {
         this.responsibles = responsibles;
     }
 
-    public List<Coment> getComent() {
+    public List<ComentAllDto> getComent() {
         return coments;
     }
 
-    public void setComent(List<Coment> coments) {
+    public void setComent(List<ComentAllDto> coments) {
         this.coments = coments;
     }
 

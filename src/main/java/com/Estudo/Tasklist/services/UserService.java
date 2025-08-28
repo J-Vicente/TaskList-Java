@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Estudo.Tasklist.auth.JwtUtil;
 import com.Estudo.Tasklist.dtos.auth.LoginDto;
-import com.Estudo.Tasklist.dtos.auth.UserDto;
 import com.Estudo.Tasklist.dtos.auth.RegistrationDto;
+import com.Estudo.Tasklist.dtos.auth.UserDto;
 import com.Estudo.Tasklist.entities.User;
 import com.Estudo.Tasklist.repositories.UserRepository;
 
@@ -16,6 +17,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private JwtUtil JwtUtil;
     
     @Transactional
     public UserDto register(RegistrationDto dto) {
@@ -39,6 +42,7 @@ public class UserService {
             throw new RuntimeException("Senha incorreta");
         }
 
+        // return JwtUtil.generateToken(user);
         return new UserDto(user);
     }
 }

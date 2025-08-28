@@ -32,8 +32,8 @@ public class ComentController {
 
 
     @PostMapping("/newComent")
-    public ResponseEntity<Coment> createComent(@RequestBody NewComentDto dto, @PathVariable Long taskId) {
-        Coment newComent = comentService.create(dto, taskId);
+    public ResponseEntity<ComentAllDto> createComent(@RequestBody NewComentDto dto, @PathVariable Long taskId) {
+        ComentAllDto newComent = comentService.create(dto, taskId);
         return ResponseEntity.status(HttpStatus.CREATED).body(newComent);
     }
 }

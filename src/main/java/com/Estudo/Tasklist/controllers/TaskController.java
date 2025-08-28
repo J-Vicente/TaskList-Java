@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Estudo.Tasklist.dtos.task.NewTaskDto;
 import com.Estudo.Tasklist.dtos.task.TaskAllDto;
 import com.Estudo.Tasklist.dtos.task.TaskDto;
-import com.Estudo.Tasklist.entities.Task;
 import com.Estudo.Tasklist.services.TaskService;
 
 @RestController
@@ -38,8 +37,8 @@ public class TaskController {
     }
 
     @PostMapping("/newTask")
-    public ResponseEntity<Task> createTask(@RequestBody NewTaskDto dto, @PathVariable Long projectId) {
-        Task newTask = taskService.create(dto, projectId);
+    public ResponseEntity<TaskDto> createTask(@RequestBody NewTaskDto dto, @PathVariable Long projectId) {
+        TaskDto newTask = taskService.create(dto, projectId);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTask);
     }
 }

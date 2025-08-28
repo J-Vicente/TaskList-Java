@@ -37,7 +37,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public Project create(NewProjectDto dto) {
+    public ProjectDto create(NewProjectDto dto) {
         User creator = userRepository.findById(dto.getCreatorId())
                 .orElseThrow(() -> new RuntimeException("Usuário criador não encontrado"));
 
@@ -46,7 +46,9 @@ public class ProjectService {
         project.setDescription(dto.getDescription());
         project.setCreator(creator);
 
-        return projectRepository.save(project);
+        Project newProject = projectRepository.save(project);
+
+        return new ProjectDto(newProject);
     }
   
 }
