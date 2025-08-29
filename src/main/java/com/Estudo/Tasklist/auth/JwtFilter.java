@@ -12,6 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.Estudo.Tasklist.entities.User;
 import com.Estudo.Tasklist.repositories.UserRepository;
 
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,26 +32,43 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String authHeader = request.getHeader("Authorization");
+        
+        try{
+            String authHeader = request.getHeader("Authorization");
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String token = authHeader.substring(7);
-            String email = jwtUtil.extractUsername(token);
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                String token = authHeader.substring(7);
 
-            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                User user = userRepository.findByEmail(email).orElse(null);
+                    String email = jwtUtil.extractUsername(token);
 
-                if (user != null && jwtUtil.validateToken(token, new org.springframework.security.core.userdetails.User(
-                        user.getEmail(), user.getPassword(), new ArrayList<>()
-                ))) {
-                    UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(user.getEmail(), null, new ArrayList<>());
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
-                }
+                    if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                        User user = userRepository.findByEmail(email).orElse(null);
+
+                        if (user != null && jwtUtil.validateToken(token, new org.springframework.security.core.userdetails.User(
+                                user.getEmail(), user.getPassword(), new ArrayList<>()
+                        ))) {
+                            UsernamePasswordAuthenticationToken authToken =
+                                    new UsernamePasswordAuthenticationToken(user.getEmail(), null, new ArrayList<>());
+                            SecurityContextHolder.getContext().setAuthentication(authToken);
+                        }
+                    }
             }
+
+            filterChain.doFilter(request, response);
+
+        } catch (JwtException ex) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            String json = String.format(
+                    "{ \"timestamp\": \"%s\", \"status\": 401, \"error\": \"Unauthorized\", \"message\": \"%s\" }",
+                    java.time.LocalDateTime.now(), "Faça login para acessar este recurso"
+            );
+
+            response.getWriter().write(json);
         }
 
-        filterChain.doFilter(request, response);
     }
 }
 
