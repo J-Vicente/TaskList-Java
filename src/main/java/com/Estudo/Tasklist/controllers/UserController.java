@@ -1,5 +1,8 @@
 package com.Estudo.Tasklist.controllers;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +19,6 @@ import com.Estudo.Tasklist.services.UserService;
 
 import jakarta.validation.Valid;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -31,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@Valid @RequestBody LoginDto dto) {
-        UserDto credentials = userService.login(dto);
-        return ResponseEntity.status(HttpStatus.OK).body(credentials);
+    public ResponseEntity<Map<String,String>> login(@Valid @RequestBody LoginDto dto) {
+        String token = userService.login(dto);
+        return ResponseEntity.ok(Collections.singletonMap("token", token));
     }
 }

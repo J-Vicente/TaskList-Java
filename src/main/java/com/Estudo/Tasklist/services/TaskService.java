@@ -75,8 +75,6 @@ public class TaskService {
 
         TaskDto newTaskDto = new TaskDto(newTask);
 
-        newTaskDto.setProjectId(projectId);
-
         return newTaskDto;
     }
 }

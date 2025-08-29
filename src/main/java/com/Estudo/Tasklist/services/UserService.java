@@ -34,7 +34,7 @@ public class UserService {
         return new UserDto(user);
     }
 
-    public UserDto login(LoginDto dto) {
+    public String login(LoginDto dto) {
         User user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
@@ -42,7 +42,6 @@ public class UserService {
             throw new RuntimeException("Senha incorreta");
         }
 
-        // return JwtUtil.generateToken(user);
-        return new UserDto(user);
+        return JwtUtil.generateToken(user);
     }
 }

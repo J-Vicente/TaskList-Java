@@ -27,7 +27,10 @@ public class TaskDto {
     public TaskDto(Task entity) {
         BeanUtils.copyProperties(entity, this);
         this.responsibles = entity.getResponsibles().stream().map(User::getName).toList();
-        this.coments = entity.getComent().stream().map(ComentAllDto::new).toList();
+        this.coments = entity.getComent() != null
+            ? entity.getComent().stream().map(ComentAllDto::new).toList()
+            : List.of();
+        this.projectId = entity.getProject().getId();
     }
 
     public Long getId() {
