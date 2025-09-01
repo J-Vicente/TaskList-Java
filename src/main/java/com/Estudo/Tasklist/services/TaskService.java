@@ -25,8 +25,6 @@ public class TaskService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @Autowired
-    private ProjectService projectService;
 
     @Autowired
     private UserRepository userRepository;

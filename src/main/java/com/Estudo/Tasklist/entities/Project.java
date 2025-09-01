@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_projects")
@@ -21,6 +22,8 @@ public class Project {
     @Id 
     @GeneratedValue
     private Long id;
+
+    @NotBlank(message = "O nome não pode ser vazio")
     private String name;
 
     @Column(columnDefinition = "TEXT")

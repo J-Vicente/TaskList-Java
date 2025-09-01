@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Estudo.Tasklist.dtos.coment.ComentAllDto;
 import com.Estudo.Tasklist.dtos.coment.NewComentDto;
-import com.Estudo.Tasklist.entities.Coment;
 import com.Estudo.Tasklist.services.ComentService;
 
 @RestController

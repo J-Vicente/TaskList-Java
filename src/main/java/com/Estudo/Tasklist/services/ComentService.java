@@ -1,5 +1,6 @@
 package com.Estudo.Tasklist.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class ComentService {
                 .orElseThrow(() -> new RuntimeException("Usuário autor não encontrado"));
 
         Coment coment = new Coment();
-        coment.setDate(dto.getDate());
+        coment.setDate(LocalDate.now());
         coment.setMessage(dto.getMessage());
         coment.setTask(task);
         coment.setAuthor(author);

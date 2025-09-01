@@ -3,7 +3,6 @@ package com.Estudo.Tasklist.dtos.project;
 import org.springframework.beans.BeanUtils;
 
 import com.Estudo.Tasklist.entities.Project;
-import com.Estudo.Tasklist.entities.User;
 
 
 public class ProjectAllDto {

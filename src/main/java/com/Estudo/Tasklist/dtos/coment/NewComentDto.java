@@ -1,7 +1,5 @@
 package com.Estudo.Tasklist.dtos.coment;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.BeanUtils;
 
 import com.Estudo.Tasklist.entities.Coment;
@@ -9,7 +7,6 @@ import com.Estudo.Tasklist.entities.Coment;
 public class NewComentDto {
 
     private String message;
-    private LocalDate date;
     private Long taskId;
     private Long authorId;
 
@@ -27,14 +24,6 @@ public class NewComentDto {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public Long getTaskId() {

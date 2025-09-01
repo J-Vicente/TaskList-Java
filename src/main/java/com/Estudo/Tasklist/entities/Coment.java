@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
 @Table(name = "tb_coments")
@@ -18,8 +20,11 @@ public class Coment {
     @Id @GeneratedValue
     private Long id;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT") 
+    @NotBlank(message = "O nome não pode ser vazio")
     private String message;
+
+    @PastOrPresent(message= "A data deve ser menor que a atual")
     private LocalDate date;
 
     @ManyToOne

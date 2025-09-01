@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import com.Estudo.Tasklist.entities.Project;
 import com.Estudo.Tasklist.entities.Status;
 import com.Estudo.Tasklist.entities.Task;
-import com.Estudo.Tasklist.entities.User;
 
 public class NewTaskDto {
 

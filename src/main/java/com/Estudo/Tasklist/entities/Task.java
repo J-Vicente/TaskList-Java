@@ -17,6 +17,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_tasks")
@@ -25,8 +27,12 @@ public class Task {
     @Id 
     @GeneratedValue
     private Long id;
+
+    @NotBlank(message = "O nome não pode ser vazio")
     private String name;
+
     //Prazo
+    @FutureOrPresent(message=" O prazo deve ser maior que a data atual")
     private LocalDate term;
 
     @Column(columnDefinition = "TEXT")

@@ -1,8 +1,5 @@
 package com.Estudo.Tasklist.dtos.project;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 
 import com.Estudo.Tasklist.entities.Project;

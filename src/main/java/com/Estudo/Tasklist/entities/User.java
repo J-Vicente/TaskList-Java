@@ -9,6 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "tb_users")
@@ -17,9 +21,14 @@ public class User {
     @Id 
     @GeneratedValue
     private Long id;
+
+    @NotBlank(message = "O nome não pode ser vazio")
     private String name;    
 
+    @Email(message = "E-mail inválido")
     private String email;
+    
+    @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
     private String password;
 
     @OneToMany(mappedBy = "creator")
