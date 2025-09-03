@@ -11,6 +11,7 @@ import com.Estudo.Tasklist.dtos.project.ProjectAllDto;
 import com.Estudo.Tasklist.dtos.project.ProjectDto;
 import com.Estudo.Tasklist.entities.Project;
 import com.Estudo.Tasklist.entities.User;
+import com.Estudo.Tasklist.exceptions.ResourceNotFoundException;
 import com.Estudo.Tasklist.repositories.ProjectRepository;
 import com.Estudo.Tasklist.repositories.UserRepository;
 
@@ -39,7 +40,7 @@ public class ProjectService {
     @Transactional
     public ProjectDto create(NewProjectDto dto) {
         User creator = userRepository.findById(dto.getCreatorId())
-                .orElseThrow(() -> new RuntimeException("Usuário criador não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário criador não encontrado"));
 
         Project project = new Project();
         project.setName(dto.getName());

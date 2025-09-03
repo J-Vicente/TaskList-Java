@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Estudo.Tasklist.dtos.project.NewProjectDto;
 import com.Estudo.Tasklist.dtos.project.ProjectAllDto;
 import com.Estudo.Tasklist.dtos.project.ProjectDto;
+import com.Estudo.Tasklist.dtos.responses.ApiResponse;
 import com.Estudo.Tasklist.services.ProjectService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/projects")
@@ -25,21 +28,39 @@ public class ProjectController {
     private ProjectService projectService;
 
     @GetMapping
-    public ResponseEntity<List<ProjectAllDto>> getProjects() {
+    public ResponseEntity<ApiResponse<List<ProjectAllDto>>> getProjects() {
         List<ProjectAllDto> projects = projectService.findAll();
-        return ResponseEntity.ok(projects);
+
+        ApiResponse<List<ProjectAllDto>> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setData(projects);
+        response.setMessage("Requisição completada com sucesso");
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProjectDto> getProjectById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<ProjectDto>> getProjectById(@PathVariable Long id) {
         ProjectDto project = projectService.findById(id);
-        return ResponseEntity.ok(project);
+
+        ApiResponse<ProjectDto> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setData(project);
+        response.setMessage("Requisição completada com sucesso");
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/newProject")
-    public ResponseEntity<ProjectDto> createProject(@RequestBody NewProjectDto dto) {
+    public ResponseEntity<ApiResponse<ProjectDto>> createProject(@Valid @RequestBody NewProjectDto dto) {
         ProjectDto newProject = projectService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newProject);
+
+        ApiResponse<ProjectDto> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setData(newProject);
+        response.setMessage("Projeto criado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 }

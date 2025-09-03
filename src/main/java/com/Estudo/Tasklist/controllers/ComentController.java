@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Estudo.Tasklist.dtos.coment.ComentAllDto;
 import com.Estudo.Tasklist.dtos.coment.NewComentDto;
+import com.Estudo.Tasklist.dtos.responses.ApiResponse;
 import com.Estudo.Tasklist.services.ComentService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("projects/{projectId}/tasks/{taskId}/coments")
@@ -24,15 +27,27 @@ public class ComentController {
     private ComentService comentService;
 
     @GetMapping
-    public ResponseEntity<List<ComentAllDto>> getComents(@PathVariable Long taskId, @PathVariable Long projectId) {
+    public ResponseEntity<ApiResponse<List<ComentAllDto>>> getComents(@PathVariable Long taskId, @PathVariable Long projectId) {
         List<ComentAllDto> coments = comentService.findAll(taskId,projectId);
-        return ResponseEntity.ok(coments);
+        
+        ApiResponse<List<ComentAllDto>> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setData(coments);
+        response.setMessage("Requisição completada com sucesso");
+
+        return ResponseEntity.ok(response);
     }
 
 
     @PostMapping("/newComent")
-    public ResponseEntity<ComentAllDto> createComent(@RequestBody NewComentDto dto, @PathVariable Long taskId) {
+    public ResponseEntity<ApiResponse<ComentAllDto>> createComent(@Valid @RequestBody NewComentDto dto, @PathVariable Long taskId) {
         ComentAllDto newComent = comentService.create(dto, taskId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newComent);
+
+        ApiResponse<ComentAllDto> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setData(newComent);
+        response.setMessage("Comentário criado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
