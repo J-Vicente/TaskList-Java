@@ -4,5 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .vscode/
+.idea/
 *.sql
 *.env
