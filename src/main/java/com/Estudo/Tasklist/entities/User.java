@@ -26,6 +26,7 @@ public class User {
     @NotBlank(message = "O nome não pode ser vazio")
     private String name;    
 
+    @NotBlank
     @Email(message = "E-mail inválido")
     private String email;
     
